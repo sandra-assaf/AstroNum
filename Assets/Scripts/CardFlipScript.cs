@@ -20,6 +20,7 @@ public class CardFlipScript : MonoBehaviour
             if (cardFront.active)
             {
                 this.animateCard = false;
+                this.GetComponent<BoxCollider2D>().enabled = false;
 
             } else
             {
