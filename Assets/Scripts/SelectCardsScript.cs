@@ -9,10 +9,13 @@ public class SelectCardsScript : MonoBehaviour
     public int numberOfCards;
     public int numberOfPickedCards;
 
+    public SpriteRenderer[] cardImages;
+    public bool LOADEM = false;
 
     void Start()
     {
         pickedCards = new List<int>();
+
         for(int i = 0; i < numberOfPickedCards; i++)
         {
             pickedCards.Add(UniqueRandomInt(0, numberOfCards));
@@ -24,12 +27,25 @@ public class SelectCardsScript : MonoBehaviour
             Debug.Log(pickedCards[i]);
         }
         Debug.Log("-------");
+    }
 
+    private void updateSprites()
+    {
+        for (int i = 0; i < numberOfPickedCards; i++)
+        {
+            int pickedValue = pickedCards[i];
+            Sprite loadedSprite = Resources.Load<Sprite>("CardFronts/" + pickedValue);
+            cardImages[i].sprite = loadedSprite;
+        }
     }
 
     void Update()
     {
-
+        if(LOADEM)
+        {
+            updateSprites();
+            LOADEM = false;
+        }
     }
     public int UniqueRandomInt(int min, int max)
     {
