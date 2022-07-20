@@ -80,7 +80,6 @@ public class DeckShuffleScript : MonoBehaviour
         {
             StartCoroutine(AnimateCard());
         }
-        Debug.Log(forward);
     }
 
     Vector3 variablePosition( Vector3 initialPosition)
