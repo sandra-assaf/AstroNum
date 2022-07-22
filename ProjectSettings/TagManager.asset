@@ -11,7 +11,7 @@ TagManager:
   - Objects
   - Water
   - UI
-  - 
+  - BGLayer
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: over
     uniqueID: 489837185
+    locked: 0
+  - name: bgImage
+    uniqueID: 1111142947
     locked: 0

@@ -22,6 +22,8 @@ public class DeckShuffleScript : MonoBehaviour
     private Vector3 initialPositionCard2;
     private Vector3 initialPositionCard3;
 
+    private Quaternion initialRotation;
+
     public Vector3 card1RefPosition;
     public Vector3 card2RefPosition;
     public Vector3 card3RefPosition;
@@ -31,12 +33,14 @@ public class DeckShuffleScript : MonoBehaviour
     private Vector3 card3TargetPosition;
 
     public float animationDuration;
+    public float rotateModifier;
 
     void Start()
     {
         initialPositionCard1 = new Vector3(0,0,-1);
         initialPositionCard2 = new Vector3(0, 0, 0);
         initialPositionCard3 = new Vector3(0, 0, 0);
+        initialRotation = card1.transform.rotation;
         forward = true;
         shuffleButton.onClick.AddListener(startShuffle);
     }
@@ -62,6 +66,10 @@ public class DeckShuffleScript : MonoBehaviour
         card2TargetPosition = variablePosition(card2RefPosition);
         card3TargetPosition = variablePosition(card3RefPosition);
 
+        float zRotation1 = Random.Range(0, rotateModifier);
+        float zRotation2 = Random.Range(0, rotateModifier);
+        float zRotation3 = Random.Range(0, rotateModifier);
+
         while (t < animationDuration)
         {
             t += Time.deltaTime;
@@ -69,6 +77,20 @@ public class DeckShuffleScript : MonoBehaviour
             card1.transform.position = Vector3.Lerp(card1.transform.position, forward? card1TargetPosition : initialPositionCard1, t/speedCard1);
             card2.transform.position = Vector3.Lerp(card2.transform.position, forward ? card2TargetPosition : initialPositionCard2, t/speedCard2);
             card3.transform.position = Vector3.Lerp(card3.transform.position, forward ? card3TargetPosition : initialPositionCard3, t / speedCard3);
+
+
+            card1.transform.rotation = Quaternion.Lerp(card1.transform.rotation, forward? 
+                                                                                        Quaternion.AngleAxis(zRotation1, Vector3.forward) :
+                                                                                        initialRotation, 
+                                                                                        t / speedCard1);
+            card2.transform.rotation = Quaternion.Lerp(card2.transform.rotation, forward ?
+                                                                                        Quaternion.AngleAxis(zRotation2, Vector3.forward) :
+                                                                                        initialRotation, 
+                                                                                        t / speedCard2);
+            card3.transform.rotation = Quaternion.Lerp(card3.transform.rotation, forward ?
+                                                                                        Quaternion.AngleAxis(zRotation3, Vector3.forward) :
+                                                                                        initialRotation,
+                                                                                        t / speedCard3);
 
             yield return null;
         }
