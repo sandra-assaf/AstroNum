@@ -55,7 +55,7 @@ public class ButtonWrapperScript : Button
 }
 
 
-[CustomEditor(typeof(ButtonWrapperScript))]
+/*[CustomEditor(typeof(ButtonWrapperScript))]
 public class ButtonWrapperScriptEditor : UnityEditor.UI.ButtonEditor
 {
 
@@ -71,4 +71,4 @@ public class ButtonWrapperScriptEditor : UnityEditor.UI.ButtonEditor
         component.fadeOutDuration = EditorGUILayout.FloatField(component.fadeOutDuration);
 
     }
-}
+}*/
