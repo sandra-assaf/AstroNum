@@ -9,8 +9,6 @@ public class DeckShuffleScript : MonoBehaviour
     public GameObject card2;
     public GameObject card3;
 
-    public Button shuffleButton;
-
     private bool isAnimating = false;
     private bool forward;
     
@@ -35,6 +33,8 @@ public class DeckShuffleScript : MonoBehaviour
     public float animationDuration;
     public float rotateModifier;
 
+    public bool animationsDone = false;
+
     void Start()
     {
         initialPositionCard1 = new Vector3(0,0,-1);
@@ -42,7 +42,7 @@ public class DeckShuffleScript : MonoBehaviour
         initialPositionCard3 = new Vector3(0, 0, 0);
         initialRotation = card1.transform.rotation;
         forward = true;
-        shuffleButton.onClick.AddListener(startShuffle);
+        startShuffle();
     }
 
     void Update()
@@ -50,13 +50,15 @@ public class DeckShuffleScript : MonoBehaviour
         
     }
 
-    void startShuffle()
+    public void stopShuffle()
     {
         this.isAnimating = !this.isAnimating;
-        if (this.isAnimating)
-        {
-            StartCoroutine(AnimateCard());
-        } 
+    }
+
+    void startShuffle()
+    {
+        this.isAnimating = true;
+        StartCoroutine(AnimateCard());
     }
 
     IEnumerator AnimateCard()
@@ -101,6 +103,9 @@ public class DeckShuffleScript : MonoBehaviour
         } else if (!forward)
         {
             StartCoroutine(AnimateCard());
+        } else
+        {
+            this.animationsDone = true;
         }
     }
 

@@ -10,7 +10,6 @@ public class SelectCardsScript : MonoBehaviour
     public int numberOfPickedCards;
 
     public SpriteRenderer[] cardImages;
-    public bool LOADEM = false;
 
     void Start()
     {
@@ -26,7 +25,7 @@ public class SelectCardsScript : MonoBehaviour
         {
             Debug.Log(pickedCards[i]);
         }
-        Debug.Log("-------");
+        updateSprites();
     }
 
     private void updateSprites()
@@ -39,14 +38,6 @@ public class SelectCardsScript : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if(LOADEM)
-        {
-            updateSprites();
-            LOADEM = false;
-        }
-    }
     public int UniqueRandomInt(int min, int max)
     {
         int val = Random.Range(min, max);

@@ -7,15 +7,20 @@ public class CardDealerScript : MonoBehaviour
     public GameObject[] cards = new GameObject[5];
     public Vector3[] initialPositions = new Vector3[5];
 
+    private (Vector3, Vector3)[] interpolationPoints = new (Vector3, Vector3)[5];
+
     private int cardMovingIndex;
 
-    public bool animatingDealing = false;
+    private bool animatingDealing = false;
     public float animationDuration;
     public float dealingSpeed;
+    public float interpolationConstant;
 
     void Start()
     {
         cardMovingIndex = 0;
+        calculateBezierInterpolations();
+        animatingDealing = true;
     }
 
     void Update()
@@ -24,6 +29,16 @@ public class CardDealerScript : MonoBehaviour
         {
             animatingDealing = false;
             StartCoroutine(AnimateCard());
+        }
+    }
+
+    void calculateBezierInterpolations()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            Vector3 p1 = new Vector3((interpolationConstant * ((i < 2) ? (-1) : 1)), 1, 0);
+            Vector3 p2 = new Vector3(initialPositions[i].x + (interpolationConstant * ((i <= 2) ? (-1) : 1)), 1, 0);
+            interpolationPoints[i] = (p1, p2);
         }
     }
 
@@ -40,17 +55,16 @@ public class CardDealerScript : MonoBehaviour
                 t = animationDuration;
             }
 
-            //cards[cardMovingIndex].transform.position = Vector3.Lerp(cards[cardMovingIndex].transform.position, initialPositions[cardMovingIndex], t / dealingSpeed);
-            cards[cardMovingIndex].transform.position = cubeBezier3(cards[cardMovingIndex].transform.position, new Vector3(-3,1,0), new Vector3(-10f, 1, 0), initialPositions[cardMovingIndex], t / animationDuration);
+            cards[cardMovingIndex].transform.position = cubeBezier3(cards[cardMovingIndex].transform.position, interpolationPoints[cardMovingIndex].Item1, interpolationPoints[cardMovingIndex].Item2, initialPositions[cardMovingIndex], t / animationDuration);
             yield return null;
         }
 
         cardMovingIndex++;
 
-        /*if (cardMovingIndex < 5)
+        if (cardMovingIndex < 5)
         {
             StartCoroutine(AnimateCard());
-        }*/
+        }
     }
 
     public static Vector3 cubeBezier3(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
