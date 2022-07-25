@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardDealerScript : MonoBehaviour
 {
-    public GameObject[] cards = new GameObject[5];
+    public CardFlipScript[] cards = new CardFlipScript[5];
     public Vector3[] initialPositions = new Vector3[5];
 
     private (Vector3, Vector3)[] interpolationPoints = new (Vector3, Vector3)[5];
@@ -59,6 +59,7 @@ public class CardDealerScript : MonoBehaviour
             yield return null;
         }
 
+        cards[cardMovingIndex].startFloating();
         cardMovingIndex++;
 
         if (cardMovingIndex < 5)

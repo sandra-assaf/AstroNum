@@ -26,6 +26,7 @@ public class GameStateScript : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(960, 620, true);
         this.shuffleButton.onClick.AddListener(gameStart);
         this.stopShuffleButton.onClick.AddListener(stopShuffle);
         stateNow = GameState.Started;
