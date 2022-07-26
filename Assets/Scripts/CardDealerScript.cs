@@ -9,8 +9,6 @@ public class CardDealerScript : MonoBehaviour
 
     private (Vector3, Vector3)[] interpolationPoints = new (Vector3, Vector3)[5];
 
-    private int cardMovingIndex;
-
     private bool animatingDealing = false;
     public float animationDuration;
     public float dealingSpeed;
@@ -18,7 +16,6 @@ public class CardDealerScript : MonoBehaviour
 
     void Start()
     {
-        cardMovingIndex = 0;
         calculateBezierInterpolations();
         animatingDealing = true;
     }
@@ -28,7 +25,10 @@ public class CardDealerScript : MonoBehaviour
         if(animatingDealing)
         {
             animatingDealing = false;
-            StartCoroutine(AnimateCard());
+            for (int i=0; i<5; i++)
+            {
+                StartCoroutine(AnimateCard(i));
+            }
         }
     }
 
@@ -42,8 +42,9 @@ public class CardDealerScript : MonoBehaviour
         }
     }
 
-    IEnumerator AnimateCard()
+    IEnumerator AnimateCard(int cardIndex)
     {
+        yield return new WaitForSeconds(0.5f);
         float t = 0f;
 
         while (t < animationDuration)
@@ -55,17 +56,12 @@ public class CardDealerScript : MonoBehaviour
                 t = animationDuration;
             }
 
-            cards[cardMovingIndex].transform.position = cubeBezier3(cards[cardMovingIndex].transform.position, interpolationPoints[cardMovingIndex].Item1, interpolationPoints[cardMovingIndex].Item2, initialPositions[cardMovingIndex], t / animationDuration);
+            cards[cardIndex].transform.position = cubeBezier3(cards[cardIndex].transform.position, interpolationPoints[cardIndex].Item1, interpolationPoints[cardIndex].Item2, initialPositions[cardIndex], t / animationDuration);
             yield return null;
         }
 
-        cards[cardMovingIndex].startFloating();
-        cardMovingIndex++;
-
-        if (cardMovingIndex < 5)
-        {
-            StartCoroutine(AnimateCard());
-        }
+        cards[cardIndex].startFloating();
+        cards[cardIndex].canHover = true;
     }
 
     public static Vector3 cubeBezier3(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
