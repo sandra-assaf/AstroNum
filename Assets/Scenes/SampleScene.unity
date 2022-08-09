@@ -7603,7 +7603,7 @@ MonoBehaviour:
   - {fileID: 1800918583}
   - {fileID: 1329692186}
   - {fileID: 1326738993}
-  cardDetailPosition: {x: -7.77, y: 0, z: 0}
+  cardDetailPosition: {x: -7.77, y: 0, z: -5}
   detailView: {fileID: 1531903274}
 --- !u!1 &1029024124
 GameObject:
@@ -9283,7 +9283,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531903270}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1.4285713, y: 1.4285713, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9293,8 +9293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5.805, y: 2.3261}
-  m_SizeDelta: {x: 12.8307, y: 11.3654}
+  m_AnchoredPosition: {x: -0.0599, y: 2.3261}
+  m_SizeDelta: {x: 22.9221, y: 12.8698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531903272
 MonoBehaviour:

@@ -217,7 +217,7 @@ public class CardFlipScript : MonoBehaviour
                 break;
 
             case CardFlipState.FlippedSmall:
-                if(canHover)
+                if(canHover && !this.animateCard)
                 {
                     cardState = CardFlipState.FlippedDetail;
                     scaleProgressively(transform.localScale, finalZoomScale, 1);
