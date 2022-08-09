@@ -10,27 +10,33 @@ public class CardDetailScript : MonoBehaviour
     public Canvas detailView;
 
     private float animationDuration = 0.5f;
+    private Vector3 initialPosition;
 
 
     // Start is called before the first frame update
     void Start()
     {
         foreach (CardFlipScript unit in cards)
+        {
             unit.MouseDown += showDetail;
+            unit.MouseDownAgain += retractDetail;
+        }
+            
+    }
+
+    void retractDetail(CardFlipScript card)
+    {
+        detailView.gameObject.SetActive(false);
+        StartCoroutine(AnimateCard(card, false));
     }
 
     void showDetail(CardFlipScript card)
     {
-        StartCoroutine(AnimateCard(card));
+        initialPosition = card.transform.position;
+        StartCoroutine(AnimateCard(card, true));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    IEnumerator AnimateCard(CardFlipScript card)
+    IEnumerator AnimateCard(CardFlipScript card, bool forward)
     {
         float t = 0f;
 
@@ -43,11 +49,17 @@ public class CardDetailScript : MonoBehaviour
                 t = animationDuration;
             }
 
-            card.transform.position = Vector3.Lerp(card.transform.position, cardDetailPosition, t / animationDuration);
+            card.transform.position = Vector3.Lerp(card.transform.position, forward ? cardDetailPosition : initialPosition, t / animationDuration);
             yield return null;
         }
 
-        detailView.gameObject.SetActive(true);
+        detailView.gameObject.SetActive(forward);
+
+        foreach (CardFlipScript cardObject in cards)
+            if (cardObject.order != card.order)
+            {
+                cardObject.canHover = !forward;
+            }
     }
 
 }

@@ -42,11 +42,10 @@ public class CardFlipScript : MonoBehaviour
     private Vector3 finalZoomScale;
 
     private float zoomTimer;
+
     public CardFlipState cardState;
-
-    public UnityEvent detailEvent;
-
     public event Action<CardFlipScript> MouseDown;
+    public event Action<CardFlipScript> MouseDownAgain;
 
 
     public enum CardFlipState
@@ -64,7 +63,6 @@ public class CardFlipScript : MonoBehaviour
         initialScale = transform.localScale;
         finalZoomScale = new Vector3(initialScale.x * zoomScale, initialScale.y * zoomScale, initialScale.z);
         cardState = CardFlipState.Unflipped;
-        detailEvent = new UnityEvent();
     }
 
     private void Update()
@@ -145,7 +143,6 @@ public class CardFlipScript : MonoBehaviour
             {
                 this.animateCard = false;
                 cardState = CardFlipState.FlippedSmall;
-                //this.GetComponent<BoxCollider2D>().enabled = false;
 
             } else
             {
@@ -173,8 +170,12 @@ public class CardFlipScript : MonoBehaviour
     {
         if(canHover && cardState != CardFlipState.FlippedDetail)
         {
-            zoomTimer = 0;
+            if (zoomTimer == zoomDuration)
+            {
+                zoomTimer = 0;
+            }
             zoomAnimationEnabled = true;
+            zoomOutAnimation = false;
         }
     }
 
@@ -182,8 +183,12 @@ public class CardFlipScript : MonoBehaviour
     {
         if (canHover && cardState != CardFlipState.FlippedDetail)
         {
-            zoomTimer = 0;
+            if (zoomTimer == zoomDuration)
+            {
+                zoomTimer = 0;
+            }
             zoomOutAnimation = true;
+            zoomAnimationEnabled = false;
         }
     }
 
@@ -192,9 +197,12 @@ public class CardFlipScript : MonoBehaviour
         switch(cardState)
         {
             case CardFlipState.Unflipped:
-                cardFront.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                this.animateCard = true;
-                cardState = CardFlipState.FlippedSmall;
+                if (canHover) 
+                { 
+                    cardFront.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                    this.animateCard = true;
+                    cardState = CardFlipState.FlippedSmall;
+                }
                 Debug.Log("clicked");
                 break;
 
@@ -205,6 +213,7 @@ public class CardFlipScript : MonoBehaviour
 
             case CardFlipState.FlippedDetail:
                 cardState = CardFlipState.FlippedSmall;
+                MouseDownAgain?.Invoke(this);
                 break;
 
         }
