@@ -179,6 +179,16 @@ public class CardFlipScript : MonoBehaviour
         }
     }
 
+    public void forceZoomOut()
+    {
+        if (zoomTimer == zoomDuration)
+        {
+            zoomTimer = 0;
+        }
+        zoomOutAnimation = true;
+        zoomAnimationEnabled = false;
+    }
+
     public void OnMouseExit()
     {
         if (canHover && cardState != CardFlipState.FlippedDetail)
@@ -207,8 +217,12 @@ public class CardFlipScript : MonoBehaviour
                 break;
 
             case CardFlipState.FlippedSmall:
-                cardState = CardFlipState.FlippedDetail;
-                MouseDown?.Invoke(this);
+                if(canHover)
+                {
+                    cardState = CardFlipState.FlippedDetail;
+                    scaleProgressively(transform.localScale, finalZoomScale, 1);
+                    MouseDown?.Invoke(this);
+                }
                 break;
 
             case CardFlipState.FlippedDetail:

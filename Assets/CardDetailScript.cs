@@ -28,11 +28,28 @@ public class CardDetailScript : MonoBehaviour
     {
         detailView.gameObject.SetActive(false);
         StartCoroutine(AnimateCard(card, false));
+        activateOtherCards(card.order, true);
+    }
+
+    public void activateOtherCards(int index, bool activate)
+    {
+        foreach(CardFlipScript cardObject in cards)
+            if (cardObject.order != index)
+        {
+            cardObject.canHover = activate;
+        }
     }
 
     void showDetail(CardFlipScript card)
     {
         initialPosition = card.transform.position;
+        activateOtherCards(card.order, false);
+        foreach (CardFlipScript cardObject in cards)
+            if (cardObject.order != card.order)
+            {
+                cardObject.forceZoomOut();
+            }
+
         StartCoroutine(AnimateCard(card, true));
     }
 
@@ -54,12 +71,6 @@ public class CardDetailScript : MonoBehaviour
         }
 
         detailView.gameObject.SetActive(forward);
-
-        foreach (CardFlipScript cardObject in cards)
-            if (cardObject.order != card.order)
-            {
-                cardObject.canHover = !forward;
-            }
     }
 
 }
