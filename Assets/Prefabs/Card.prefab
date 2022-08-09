@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &335183648726284234
+--- !u!1 &4531871740259568330
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 335183648726284235}
-  - component: {fileID: 335183648726284232}
+  - component: {fileID: 4531871740259568331}
+  - component: {fileID: 4531871740259568328}
   m_Layer: 3
   m_Name: Cardback
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &335183648726284235
+--- !u!4 &4531871740259568331
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183648726284234}
+  m_GameObject: {fileID: 4531871740259568330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 335183649275790817}
+  m_Father: {fileID: 4531871740775545057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &335183648726284232
+--- !u!212 &4531871740259568328
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183648726284234}
+  m_GameObject: {fileID: 4531871740259568330}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &335183649275790816
+--- !u!1 &4531871740775545056
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,40 +92,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 335183649275790817}
-  - component: {fileID: 335183649275790822}
-  - component: {fileID: 335183649275790823}
+  - component: {fileID: 4531871740775545057}
+  - component: {fileID: 4531871740775545062}
+  - component: {fileID: 4531871740775545063}
   m_Layer: 0
-  m_Name: Card 1
+  m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &335183649275790817
+--- !u!4 &4531871740775545057
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183649275790816}
+  m_GameObject: {fileID: 4531871740775545056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: 0.07, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 335183648726284235}
-  - {fileID: 335183649585789710}
+  - {fileID: 4531871740259568331}
+  - {fileID: 4531871741118547470}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &335183649275790822
+--- !u!61 &4531871740775545062
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183649275790816}
+  m_GameObject: {fileID: 4531871740775545056}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -145,34 +145,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.828314, y: 14.730919}
   m_EdgeRadius: 0
---- !u!114 &335183649275790823
+--- !u!114 &4531871740775545063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183649275790816}
+  m_GameObject: {fileID: 4531871740775545056}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54c0b26cd5ab26e47a9c0656432c6fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardFront: {fileID: 335183649585789705}
-  cardBack: {fileID: 335183648726284234}
+  cardFront: {fileID: 4531871741118547465}
+  cardBack: {fileID: 4531871740259568330}
   rotationSpeed: 2
-  floatAnimationDuration: 0
-  floatDisplacementMax: 0
-  blurSprite: {fileID: 0}
-  canHover: 0
-  zoomPosition: {x: 0, y: 0, z: 0}
-  zoomDuration: 0
-  zoomScale: 0
-  zoomAnimationEnabled: 0
-  cardState: 0
-  detailEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!1 &335183649585789705
+--- !u!1 &4531871741118547465
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,8 +168,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 335183649585789710}
-  - component: {fileID: 335183649585789711}
+  - component: {fileID: 4531871741118547470}
+  - component: {fileID: 4531871741118547471}
   m_Layer: 3
   m_Name: CardFront
   m_TagString: Untagged
@@ -189,28 +177,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &335183649585789710
+--- !u!4 &4531871741118547470
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183649585789705}
+  m_GameObject: {fileID: 4531871741118547465}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 335183649275790817}
+  m_Father: {fileID: 4531871740775545057}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!212 &335183649585789711
+--- !u!212 &4531871741118547471
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335183649585789705}
+  m_GameObject: {fileID: 4531871741118547465}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -250,7 +238,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 88.6, y: 147.6}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -36,8 +36,8 @@ public class CardDealerScript : MonoBehaviour
     {
         for(int i = 0; i < 5; i++)
         {
-            Vector3 p1 = new Vector3((interpolationConstant * ((i < 2) ? (-1) : 1)), 1, 0);
-            Vector3 p2 = new Vector3(initialPositions[i].x + (interpolationConstant * ((i <= 2) ? (-1) : 1)), 1, 0);
+            Vector3 p1 = new Vector3(((Mathf.Abs(initialPositions[i].x) / interpolationConstant) * ((i < 2) ? (-1) : 1)), 0f, 0);
+            Vector3 p2 = new Vector3(initialPositions[i].x + ((Mathf.Abs(initialPositions[i].x))/interpolationConstant * ((i <= 2) ? (-1) : 1)), 0f, 0);
             interpolationPoints[i] = (p1, p2);
         }
     }
