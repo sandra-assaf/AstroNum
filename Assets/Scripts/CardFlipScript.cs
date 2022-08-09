@@ -10,6 +10,8 @@ public class CardFlipScript : MonoBehaviour
     public GameObject cardFront;
     public GameObject cardBack;
 
+    public int order;
+
     public float rotationSpeed = 2f;
     private float animationSum = 0;
     private bool animateCard = false;
@@ -43,6 +45,9 @@ public class CardFlipScript : MonoBehaviour
     public CardFlipState cardState;
 
     public UnityEvent detailEvent;
+
+    public event Action<CardFlipScript> MouseDown;
+
 
     public enum CardFlipState
     {
@@ -187,11 +192,7 @@ public class CardFlipScript : MonoBehaviour
         switch(cardState)
         {
             case CardFlipState.Unflipped:
-                //blurSprite.gameObject.SetActive(true);
                 cardFront.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                //Color tmp = blurSprite.color;
-                //tmp.a = 0.4f;
-                //blurSprite.color = tmp;
                 this.animateCard = true;
                 cardState = CardFlipState.FlippedSmall;
                 Debug.Log("clicked");
@@ -199,7 +200,7 @@ public class CardFlipScript : MonoBehaviour
 
             case CardFlipState.FlippedSmall:
                 cardState = CardFlipState.FlippedDetail;
-                detailEvent.Invoke();
+                MouseDown?.Invoke(this);
                 break;
 
             case CardFlipState.FlippedDetail:

@@ -15,22 +15,13 @@ public class CardDetailScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 5; i++)
-        {
-            cards[i].detailEvent.AddListener(moveCardToPosition);
-        }
+        foreach (CardFlipScript unit in cards)
+            unit.MouseDown += showDetail;
     }
 
-    void moveCardToPosition()
+    void showDetail(CardFlipScript card)
     {
-        for(int i = 0; i < 5; i++)
-        {
-            if(cards[i].cardState == CardFlipScript.CardFlipState.FlippedDetail)
-            {
-                StartCoroutine(AnimateCard(i));
-                break;
-            }
-        }
+        StartCoroutine(AnimateCard(card));
     }
 
     // Update is called once per frame
@@ -39,7 +30,7 @@ public class CardDetailScript : MonoBehaviour
         
     }
 
-    IEnumerator AnimateCard(int cardIndex)
+    IEnumerator AnimateCard(CardFlipScript card)
     {
         float t = 0f;
 
@@ -52,7 +43,7 @@ public class CardDetailScript : MonoBehaviour
                 t = animationDuration;
             }
 
-            cards[cardIndex].transform.position = Vector3.Lerp(cards[cardIndex].transform.position, cardDetailPosition, t / animationDuration);
+            card.transform.position = Vector3.Lerp(card.transform.position, cardDetailPosition, t / animationDuration);
             yield return null;
         }
 
