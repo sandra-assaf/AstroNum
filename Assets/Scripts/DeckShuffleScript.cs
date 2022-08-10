@@ -31,9 +31,14 @@ public class DeckShuffleScript : MonoBehaviour
     private Vector3 card3TargetPosition;
 
     public float animationDuration;
+    public float moveAnimationDuration;
     public float rotateModifier;
 
     public bool animationsDone = false;
+    public bool transitioning = false;
+
+    public Vector3 finalScale = new Vector3(0.35f, 0.35f, 1);
+    public Vector3 finalDeckPosition;
 
     void Start()
     {
@@ -105,8 +110,34 @@ public class DeckShuffleScript : MonoBehaviour
             StartCoroutine(AnimateCard());
         } else
         {
-            this.animationsDone = true;
+            transitioning = true;
+            StartCoroutine(MoveToFinalPos());
         }
+    }
+
+    IEnumerator MoveToFinalPos()
+    {
+        float t = 0f;
+        _ = Time.deltaTime;
+        while (t < moveAnimationDuration)
+        {
+            t += Time.deltaTime;
+
+            if (t > moveAnimationDuration)
+            {
+                t = moveAnimationDuration;
+            }
+
+            this.transform.position = Vector3.MoveTowards(this.transform.position,
+                                                    finalDeckPosition,
+                                                    t / moveAnimationDuration);
+            this.transform.localScale = Vector3.Lerp(this.transform.localScale,
+                                                    finalScale,
+                                                    t / moveAnimationDuration);
+            yield return null;
+        }
+
+        this.animationsDone = true;
     }
 
     Vector3 variablePosition( Vector3 initialPosition)

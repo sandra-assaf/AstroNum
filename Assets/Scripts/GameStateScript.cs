@@ -10,7 +10,7 @@ public class GameStateScript : MonoBehaviour
 {
     public ButtonWrapperScript shuffleButton;
     public DeckShuffleScript deck;
-    public Button stopShuffleButton;
+    public ButtonWrapperScript stopShuffleButton;
     public SelectCardsScript selectedCards;
     private enum GameState
     {
@@ -49,10 +49,14 @@ public class GameStateScript : MonoBehaviour
                 }
                     break;
             case GameState.StopShuffling:
+                if(deck.transitioning)
+                {
+                    stopShuffleButton.fadeOut();
+                    deck.transitioning = false;
+                }
                 if(deck.animationsDone)
                 {
                     deck.gameObject.SetActive(false);
-                    stopShuffleButton.gameObject.SetActive(false);
                     selectedCards.gameObject.SetActive(true);
                     stateNow = GameState.DealCards;
                 }
